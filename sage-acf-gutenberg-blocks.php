@@ -73,6 +73,7 @@ add_action('acf/init', function () {
                     'enqueue_style'     => 'EnqueueStyle',
                     'enqueue_script'    => 'EnqueueScript',
                     'enqueue_assets'    => 'EnqueueAssets',
+                    'parent'            => 'Parent',
                 ]);
 
                 if (empty($file_headers['title'])) {
@@ -151,6 +152,10 @@ add_action('acf/init', function () {
                 // If the SupportsMultiple header is set in the template, restrict this block multiple feature
                 if (!empty($file_headers['supports_multiple'])) {
                     $data['supports']['multiple'] = $file_headers['supports_multiple'] === 'true' ? true : false;
+                }
+
+                if (!empty($file_headers['parent'])) {
+                    $data['parent'] = explode(' ', $file_headers['parent']);
                 }
 
                 // Register the block with ACF
